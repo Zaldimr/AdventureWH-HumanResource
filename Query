@@ -1,7 +1,15 @@
 -- Pegawai yang memiliki kontribusi paling banyak
-select Name, D.Name as DepartmentName, SUM(OverallWork) from WH.FactSalesPurchase F
-join WH.DimEmployee E on E.DimEmployeeKey = F.DimEmployeeKey
-join WH.DimDepartement D on D.DepartementKey = E.DepartementKey
+select Name, D.Name as DepartmentName, SUM(OverallWork) from AWHumanResource.FactSalesPurchase F
+join AWHumanResource.DimEmployee E on E.DimEmployeeKey = F.DimEmployeeKey
+join AWHumanResource.DimDepartment D on D.DepartmentKey = E.DepartmentKey
 GROUP BY E.EmployeeKey, Name, D.Name
 ORDER BY OverallWork DESC
 
+-- hubungan antara departemen dengan rata-rata OverallWork
+select G.Name as DepartmentName, AVG(OverallWork) from AWHumanResource.FactSalesPurchase F
+join AWHumanResource.DimEmployee E on E.EmployeeKey = F.EmployeeKey
+join AWHumanResource.DimDepartment G on G.DepartmentKey = E.DepartmentKey
+GROUP BY G.Name
+ORDER BY OverallWork DESC
+
+-- 
