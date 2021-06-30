@@ -1,0 +1,7 @@
+-- Pegawai yang memiliki kontribusi paling banyak
+select Name, D.Name as DepartmentName, SUM(OverallWork) from WH.FactSalesPurchase F
+join WH.DimEmployee E on E.DimEmployeeKey = F.DimEmployeeKey
+join WH.DimDepartement D on D.DepartementKey = E.DepartementKey
+GROUP BY E.EmployeeKey, Name, D.Name
+ORDER BY OverallWork DESC
+
