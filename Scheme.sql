@@ -7,7 +7,6 @@ USE AWHumanResource;
 
 -- [Query untuk membuat tabel di-execute dengan connect ke database AWHumanResource]
 
---Membuat tabel Employee 
 CREATE TABLE DimEmployee(
     EmployeeKey int
         constraint DimEmployee_pk
@@ -49,9 +48,8 @@ CREATE TABLE DimTime(
  date datetime2(7)
 )
 --Membuat tabel FactTable
-CREATE TABLE DimFactTable(
-    SalesQuota money,
-    SalesYTD money,
+CREATE TABLE FactSalesPurchase(
+    OverallWork money,
     EmployeeKey int
         constraint FactTable_Employee_EmployeeKey_fk
             references DimEmployee,
@@ -61,8 +59,9 @@ CREATE TABLE DimFactTable(
     DepartmentKey int
         constraint FactTable_Department_DepartmentKey_fk
             references DimDepartment,
- TimeKey int
-  constraint FactTable_Time_TimeKey_fk
-   references DimTime
+    TimeKey int
+        constraint FactTable_Time_TimeKey_fk
+            references DimTime
 )
-ALTER TABLE HRDevelopment.DimFactTable ADD CONSTRAINT PK_FACTID PRIMARY KEY (SalesQuota, SalesYTD) --harusnya fact table gapake PK gapapa
+
+--ALTER TABLE AWHumanResource.DimFactTable ADD CONSTRAINT PK_FACTID PRIMARY KEY (SalesQuota, SalesYTD) --harusnya fact table gapake PK gapapa
