@@ -12,4 +12,19 @@ join AWHumanResource.DimDepartment G on G.DepartmentKey = E.DepartmentKey
 GROUP BY G.Name
 ORDER BY OverallWork DESC
 
--- 
+-- pegawai yang memiliki paling banyak kontribusinya di tahun 2013
+select Name, SUM(OverallWork) from AWHumanResource.FactSalesPurchase F
+join AWHumanResource.DimEmployee E on E.EmployeeKey = F.EmployeeKey
+join AWHumanResource.DimTime T on T.TimeKey = F.TimeKey
+WHERE Year = 2013
+GROUP BY E.EmployeeKey, Name
+ORDER BY OverallWork DESC
+
+-- pegawai yang memiliki paling banyak rata-rata gaji per jam
+select Name, D.Name as DepartmentName, S.Rate from AWHumanResource.FactSalesPurchase F
+join AWHumanResource.DimEmployee E on E.DimEmployeeKey = F.DimEmployeeKey
+join AWHumanResource.DimDepartment D on D.DepartmentKey = E.DepartmentKey
+join AWHumanResource.DimSalary S on S.SalaryKey = D.SalaryKey
+GROUP BY E.EmployeeKey, Name, D.Name
+ORDER BY S.Rate DESC
+
