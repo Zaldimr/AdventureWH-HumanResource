@@ -1,5 +1,0 @@
---Create Index
-CREATE INDEX employee_key ON DimEmployee (EmployeeKey)
-CREATE INDEX department_key ON DimDepartment (DepartmentKey)
-CREATE INDEX time_key ON DimTime (TimeKey)
-CREATE INDEX salary_key ON DimSalary (SalaryKey)
